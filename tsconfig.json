@@ -4,8 +4,11 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
-      ]
+        "./"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
     }
   },
   "include": [
@@ -13,5 +16,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/_layout.js"  ]
 }
