@@ -9,6 +9,15 @@
       "@assets/*": [
         "./assets/*"
       ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@constants/*": [
+        "./constants/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
     }
   },
   "include": [

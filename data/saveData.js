@@ -36,12 +36,45 @@ const saveData = async (initialNumber, finalNumber) => {
   const data = await Promise.all(
     responses.map(async (response) => {
       const pokemon = await response.json();
-      pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+      pokemon.name =
+        pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
       console.log(`Saving ${pokemon.name}`);
+      // get flavor text using species url
+      const speciesResponse = await fetch(pokemon.species.url);
+      const species = await speciesResponse.json();
+      let flavorText = species.flavor_text_entries.find(
+        (entry) =>
+          entry.language.name === "en" && entry.version.name === "firered"
+      );
+      if (!flavorText) {
+        flavorText = species.flavor_text_entries.find(
+          (entry) => entry.language.name === "en"
+        );
+      }
+      flavorText.flavor_text = flavorText.flavor_text.replace(/\n/g, " ");
+      flavorText.flavor_text = flavorText.flavor_text.replace(
+        /POKéMON/g,
+        "Pokémon"
+      );
+      pokemon.flavor_text = flavorText.flavor_text;
       return {
         id: pokemon.id,
         name: pokemon.name,
         image: pokemon.sprites.other["official-artwork"].front_default,
+        type1: pokemon.types[0].type.name,
+        type2: pokemon.types[1] ? pokemon.types[1].type.name : null,
+        weight: pokemon.weight,
+        height: pokemon.height,
+        abilities: pokemon.abilities.map((ability) => ability.ability.name),
+        stats: {
+          hp: pokemon.stats[0].base_stat,
+          attack: pokemon.stats[1].base_stat,
+          defense: pokemon.stats[2].base_stat,
+          specialAttack: pokemon.stats[3].base_stat,
+          specialDefense: pokemon.stats[4].base_stat,
+          speed: pokemon.stats[5].base_stat,
+        },
+        flavor_text: pokemon.flavor_text,
       };
     })
   );
@@ -50,4 +83,4 @@ const saveData = async (initialNumber, finalNumber) => {
   });
 };
 
-saveData(1001, 1025);
+saveData(801, 1025);
