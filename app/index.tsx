@@ -25,7 +25,6 @@ export default function Page() {
 
   useEffect(() => {
     if (search === "") {
-      setCards([]);
       getPokemons(orderBy);
     } else {
       filterPokemons(search, orderBy);
