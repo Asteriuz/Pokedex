@@ -55,7 +55,7 @@ module.exports = {
           fighting: "#C12239",
           fire: "#F57D31",
           flying: "#A891EC",
-          ghost: "#705598",
+          ghost: "#70559B",
           normal: "#AAA67F",
           grass: "#74CB48",
           ground: "#DEC16B",

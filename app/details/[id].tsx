@@ -1,4 +1,4 @@
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, Stack, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
@@ -8,19 +8,17 @@ import getColorByType from "@utils/getColorByType";
 import BaseStats from "@components/details/BaseStats";
 import About from "@components/details/About";
 import capitalize from "@utils/capitalize";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Page() {
   const { id } = useLocalSearchParams();
+  const pokemon = pokemons[Number(id) - 1];
 
   return (
-    <>
-      <StatusBar
-        backgroundColor={getColorByType(pokemons[Number(id) - 1].type1)}
-      />
+    <SafeAreaView>
+      <StatusBar backgroundColor={getColorByType(pokemon.type1)} />
       <View
-        className={`h-screen w-screen bg-type-${
-          pokemons[Number(id) - 1].type1
-        } flex flex-col justify-between p-2`}
+        className={`h-screen w-screen bg-type-${pokemon.type1} flex flex-col justify-between p-2`}
       >
         <View
           className="flex flex-row justify-center items-center gap-4"
@@ -38,7 +36,7 @@ export default function Page() {
             className="font-poppins_bold flex-grow text-headline text-white"
             style={{ includeFontPadding: false }}
           >
-            {pokemons[Number(id) - 1].name}
+            {pokemon.name}
           </Text>
           <Text
             className="font-poppins_bold text-subtitle-2 text-white"
@@ -48,15 +46,16 @@ export default function Page() {
           </Text>
         </View>
         <View
-          className="absolute right-0 bg-no-repeat"
+          className="absolute right-0 "
           style={{ zIndex: 1, top: 16, right: 16, width: 208, height: 208 }}
         >
           <Image source={require("@assets/icons/bgPokeball.png")} />
         </View>
         {Number(id) != 1 && (
           <Link
+            replace
             href={`/details/${Number(id) - 1}`}
-            className="absolute left-0 bg-no-repeat"
+            className="absolute left-0 "
             style={{
               zIndex: 2,
               left: 32,
@@ -76,8 +75,9 @@ export default function Page() {
         )}
         {Number(id) != pokemons.length && (
           <Link
+            replace
             href={`/details/${Number(id) + 1}`}
-            className="absolute right-0 bg-no-repeat"
+            className="absolute right-0 "
             style={{ zIndex: 2, right: 32, top: 192, width: 32, height: 32 }}
             asChild
           >
@@ -95,39 +95,37 @@ export default function Page() {
         >
           <ExpoImage
             source={{
-              uri: pokemons[Number(id) - 1].image,
+              uri: pokemon.image,
             }}
             style={{ width: 240, height: 240, marginTop: -176 }}
           />
           <View className="flex flex-row -mt-4 items-center gap-4">
-            <View
-              className={`bg-type-${
-                pokemons[Number(id) - 1].type1
-              } rounded-3xl px-3 py-1`}
-            >
+            <View className={`bg-type-${pokemon.type1} rounded-3xl px-3 py-1`}>
               <Text
                 className="font-poppins_bold text-white text-subtitle-3"
                 style={{ includeFontPadding: false }}
               >
-                {capitalize(pokemons[Number(id) - 1].type1)}
+                {capitalize(pokemon.type1)}
               </Text>
             </View>
-            {pokemons[Number(id) - 1].type2 && (
-              <View className="bg-type-poison rounded-3xl px-3 py-1">
+            {pokemon.type2 && (
+              <View
+                className={`bg-type-${pokemon.type2} rounded-3xl px-3 py-1`}
+              >
                 <Text
                   className="font-poppins_bold text-white text-subtitle-3"
                   style={{ includeFontPadding: false }}
                 >
-                  {capitalize(pokemons[Number(id) - 1].type2)}
+                  {capitalize(pokemon.type2)}
                 </Text>
               </View>
             )}
           </View>
-          <About {...pokemons[Number(id) - 1]} />
-          <BaseStats {...pokemons[Number(id) - 1]} />
+          <About {...pokemon} />
+          <BaseStats {...pokemon} />
         </View>
       </View>
-    </>
+    </SafeAreaView>
   );
 }
 

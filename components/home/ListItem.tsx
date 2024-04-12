@@ -13,6 +13,7 @@ const ListItem: React.FC<ListItemProps> = React.memo(({ item }) => {
   return (
     <View key={item.id} className="flex-1/3">
       <Link
+        push
         style={styles.elevation}
         className="shadow-2xl bg-white rounded-2xl flex items-center h-32 aspect-square justify-center flex-grow"
         href={
