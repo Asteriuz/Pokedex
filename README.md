@@ -8,10 +8,6 @@
 
 ## Preview do Projeto (Folder Preview)
 
-<video width="375" height="833" controls>
-    <source src="./preview/Video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
 <picture>
     <source srcset="./preview/Home.jpg" width="375" height="833" alt="Home" style="width:auto;">
     <img src="./preview/Home.jpg" alt="Home" style="width:auto;">
@@ -20,10 +16,61 @@
     <source srcset="./preview/DetalhesMewtwo.jpg" width="375" height="833" alt="Details" style="width:auto;">
     <img src="./preview/Details.jpg" alt="Details" style="width:auto;">
 </picture>
-<picture>
-    <source srcset="./preview/DetalhesPsyduck.jpg" width="375" height="833" alt="Search" style="width:auto;">
-    <img src="./preview/Search.jpg" alt="Search" style="width:auto;">
-</picture>
+
+<br/>
+
+[Veja o Vídeo](./preview/Video.mp4)
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/) | [NPM](https://www.npmjs.com/)
+- [Expo](https://expo.dev/)
+- [Git](https://git-scm.com/)
+
+### Rodando o projeto
+
+1. Clone o repositório
+
+```bash
+git clone https://github.com/Asteriuz/Pokedex
+```
+
+2. Acesse a pasta do projeto
+
+```bash
+cd PokeDex
+```
+
+3. Instale as dependências
+
+```bash
+yarn install
+```
+
+ou
+
+```bash
+npm install
+```
+
+4. Rode o projeto
+
+```bash
+expo start
+```
+
+5. Acesse o projeto
+
+Acesse o projeto através do aplicativo Expo Go, disponível na [Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) ou [App Store](https://apps.apple.com/br/app/expo-go/id982107779).
+
+6. Escaneie o QR Code
+
+Escaneie o QR Code gerado no terminal ou no navegador.
+
+7. Pronto!
 
 ## Protótipo de referência
 
